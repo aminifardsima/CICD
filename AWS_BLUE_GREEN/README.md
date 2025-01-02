@@ -73,6 +73,7 @@ Now we send each image to ECR:
 
 
 Now we make a task inside our ECS cluster
+
 `aws ecs register-task-definition --cli-input-json "file:///home/ec2-user/environment/deployment/taskdef-customer.json"`
 
 
@@ -87,15 +88,21 @@ Now we make a task inside our ECS cluster
 `git push -u origin dev`
 
 `git commit -m 'deploymentcommited'`
+
 now we make a repository named deployment inside code commit.
 
 `git remote add origin  https://git-codecommit.us-east-1.amazonaws.com/v1/repos/deployment`
+
 `git push -u origin dev`
+
 `touch create-customer-microservice-tg-two.json`
+
 `aws ecs create-service --service-name customer-microservice --cli-input-json file://create-customer-microservice-tg-two.json`
 
 `touch create-employee-microservice-tg-two.json`
+
 `aws ecs create-service --service-name employee-microservice --cli-input-json file://create-employee-microservice-tg-two.json`
+
 Now repeat the steps for employee
 
 `dbEndpoint=$(cat ~/environment/microservices/employee/app/config/config.js | grep 'APP_DB_HOST' | cut -d '"' -f2)`
@@ -103,7 +110,9 @@ Now repeat the steps for employee
 `account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)`
 
 `docker tag employee:latest $account_id.dkr.ecr.us-east-1.amazonaws.com/employee:latest`
+
 `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $account_id.dkr.ecr.us-east-1.amazonaws.com`
+
 `docker push $account_id.dkr.ecr.us-east-1.amazonaws.com/employee:latest`
 
 
@@ -115,18 +124,23 @@ Now we scale up the containers for customer to have 3 running containers we run 
 
 
 Now in order to log in to our Aws:
+
 `account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)`
+
 `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $account_id.dkr.ecr.us-east-1.amazonaws.com`
+
 
 if we want to make a service we run this code 
 
 
 `aws ecs create-service --service-name customer-microservice --cli-input-json file://create-customer-microservice-tg-two.json`
 
+
 in order to see which container has cotten which ip and they belong to which task we run the bellow command: 
   
 `aws ecs list-tasks --cluster microservices-serverlesscluster -a`
   
+
 
 if we want to see the detail of the task :
 
