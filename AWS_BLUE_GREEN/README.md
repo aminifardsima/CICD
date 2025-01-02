@@ -144,7 +144,7 @@ in order to see which container has cotten which ip and they belong to which tas
 
 if we want to see the detail of the task :
 
-`aws ecs describe-tasks --cluster microservices-serverlesscluster --tasks 7aa5806d713e46b3b8144813a5456d85`
+```aws ecs describe-tasks --cluster microservices-serverlesscluster --tasks 7aa5806d713e46b3b8144813a5456d85```
 
 I
 
