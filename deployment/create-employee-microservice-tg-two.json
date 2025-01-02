@@ -1,0 +1,57 @@
+{
+
+    "taskDefinition": "employee-microservice:11",
+
+    "cluster": "microservices-serverlesscluster",
+
+    "loadBalancers": [
+
+        {
+
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:523184819182:targetgroup/employee-tg-two/91e6ba47b25e8662",
+
+            "containerName": "employee",
+
+            "containerPort": 8080
+
+        }
+
+    ],
+
+    "desiredCount": 1,
+
+    "launchType": "FARGATE",
+
+    "schedulingStrategy": "REPLICA",
+
+    "deploymentController": {
+
+        "type": "CODE_DEPLOY"
+
+    },
+
+    "networkConfiguration": {
+
+        "awsvpcConfiguration": {
+
+            "subnets": [
+
+                "subnet-01393bf5aa1ebd740",
+
+                "subnet-0bd7e0b824f8d32b0"
+
+            ],
+
+            "securityGroups": [
+
+                "sg-00536b48702a06f3e"
+
+            ],
+
+            "assignPublicIp": "ENABLED"
+
+        }
+
+    }
+
+}

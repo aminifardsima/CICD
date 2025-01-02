@@ -1,0 +1,77 @@
+{
+
+    "containerDefinitions": [
+
+        {
+
+            "name": "employee",
+
+            "image": "<IMAGE1_NAME>",
+
+            "environment": [
+
+                {
+
+                    "name": "APP_DB_HOST",
+
+                    "value": "supplierdb.ckxxpscxa6nu.us-east-1.rds.amazonaws.com"
+
+                }
+
+            ],
+
+            "essential": true,
+
+            "portMappings": [
+
+                {
+
+                    "hostPort": 8080,
+
+                    "protocol": "tcp",
+
+                    "containerPort": 8080
+
+                }
+
+            ],
+
+            "logConfiguration": {
+
+                "logDriver": "awslogs",
+
+                "options": {
+
+                    "awslogs-create-group": "true",
+
+                    "awslogs-group": "awslogs-capstone",
+
+                    "awslogs-region": "us-east-1",
+
+                    "awslogs-stream-prefix": "awslogs-capstone"
+
+                }
+
+            }
+
+        }
+
+    ],
+
+    "requiresCompatibilities": [
+
+        "FARGATE"
+
+    ],
+
+    "networkMode": "awsvpc",
+
+    "cpu": "512",
+
+    "memory": "1024",
+
+    "executionRoleArn": "arn:aws:iam::523184819182:role/PipelineRole",
+
+    "family": "employee-microservice"
+
+}
