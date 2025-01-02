@@ -107,7 +107,7 @@ Now repeat the steps for employee
 `docker push $account_id.dkr.ecr.us-east-1.amazonaws.com/employee:latest`
 
 
-Step:
+Step4:
 
 Now we scale up the containers for customer to have 3 running containers we run the bellow code:
 
