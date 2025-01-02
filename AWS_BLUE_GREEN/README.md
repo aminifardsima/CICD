@@ -114,57 +114,25 @@ Now we scale up the containers for customer to have 3 running containers we run 
 `aws ecs update-service --cluster microservices-serverlesscluster --service customer-microservice --desired-count 3`
 
 
+Now in order to log in to our Aws:
+`account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)`
+`aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $account_id.dkr.ecr.us-east-1.amazonaws.com`
 
-account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $account_id.dkr.ecr.us-east-1.amazonaws.com
+if we want to make a service we run this code 
 
-  537  aws ecs create-service --service-name customer-microservice --cli-input-json file://create-customer-microservice-tg-two.json
-  538  ls
-  539  cd deployment/
-  540  ls
-  541  aws ecs create-service --service-name customer-microservice --cli-input-json file://create-customer-microservice-tg-two.json
-  542  aws ecs describe-task-definition --task-definition customer-microservice
-  543  aws ecs stop-task --cluster microservices-serverlesscluster --task customer
-  544  aws ecs list-tasks --cluster microservices-serverlesscluster
-  545  aws ecs list-tasks --cluster microservices-serverlesscluster -a
-  546  aws ecs delete-service --cluster <cluster-name> --service <service-name> --force
-  547  aws ecs delete-service --cluster microservices-serverlesscluster --service <service-name> --force
-  548  aws ecs create-service --service-name customer-microservice --cli-input-json file://create-customer-microservice-tg-two.json
-  549  aws ecs create-service --service-name employee-microservice --cli-input-json file://create-employee-microservice-tg-two.json
-  550  aws ecs list-tasks --cluster microservices-serverlesscluster
-  551  voclabs:~/environment/deployment (dev) $ aws ecs list-tasks --cluster microservices-serverlesscluster
-  552  {     "taskArns": [;         "arn:aws:ecs:us-east-1:523184819182:task/microservices-serverlesscluster/7aa5806d713e46b3b8144813a5456d85",;         "arn:aws:ecs:us-east-1:523184819182:task/microservices-serverlesscluster/7e6a73ffd5844191aa3675509ed85510";     ]; }
-  553  aws ecs describe-tasks --cluster microservices-serverlesscluster --tasks 7aa5806d713e46b3b8144813a5456d85
-  554  aws ecs execute-command --cluster microservices-serverlesscluster  --task 7aa5806d713e46b3b8144813a5456d85   --container customer   --interactive   --command "/bin/bash"
-  555  cd ..
-  556  ls
-  557  cd environment/
-  558  ls
-  559  mkdir plugin
-  560  cd plugin/
-  561  curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm" -o "session-manager-plugin.rpm"
-  562  ls
-  563  sudo yum install -y session-manager-plugin.rpm
-  564  curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm" -o "session-manager-plugin.rpm"
-  565  aws ecs execute-command --cluster microservices-serverlesscluster  --task 7aa5806d713e46b3b8144813a5456d85   --container customer   --interactive   --command "/bin/bash"
-  566  cd ..
-  567  cd plugin/
-  568  aws ecs describe-tasks --cluster microservices-serverlesscluster --tasks 7e6a73ffd5844191aa3675509ed85510
-  569  ip a
-  570  ls
-  571  cd deployment/
-  572  ls
-  573  whoami 
-  574  ls
-  575  cd ~
-  576  ld
-  577  ls -al
-  578  cd .ssh/
-  579  ls
-  580  cat authorized_keys 
-  581  ls
-  582  history
 
+`aws ecs create-service --service-name customer-microservice --cli-input-json file://create-customer-microservice-tg-two.json`
+
+in order to see which container has cotten which ip and they belong to which task we run the bellow command: 
+  
+`aws ecs list-tasks --cluster microservices-serverlesscluster -a`
+  
+
+if we want to see the detail of the task :
+
+`aws ecs describe-tasks --cluster microservices-serverlesscluster --tasks 7aa5806d713e46b3b8144813a5456d85`
+
+I
 
 
 
