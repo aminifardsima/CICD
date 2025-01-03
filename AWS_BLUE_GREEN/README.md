@@ -35,9 +35,11 @@ Amazon VPC and ECR using the Amazon network.
 **9)** RDS,one relational database is runng in two private subnets.
 
 **10)** containers are created by microservices that are runing inside Amazon ECS. When customer service is scaled up, 3 containers for customer will be created (as it is needed) .
+
 **11)** IAM ROLE each user has its own access to the services by the policy that is defined in IAM ROLE.
 
 **12)** Cloud watch logs. it keeps the record of logs in the whole process.
+
 **13)** Cloud 9 has access to all services in the same VPC.
 
 
