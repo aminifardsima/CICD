@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: spark-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: JAVA_HOME
+              value: "{{ .Values.env.JAVA_HOME }}"
+            - name: DATA_PATH
+              value: "{{ .Values.env.DATA_PATH }}"
+          volumeMounts:
+            - mountPath: "/app/data"
+              name: spark-data-volume
+      volumes:
+        - name: spark-data-volume
+          hostPath:
+            path: "/mnt/data"
+            type: Directory
+
