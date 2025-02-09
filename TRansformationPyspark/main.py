@@ -30,7 +30,7 @@ def process_outliers(spark_df):
             when(
                 (col("stddev").isNotNull()) & (col("mean").isNotNull()) & 
                 (abs((col(column) - col("mean")) / col("stddev")) > 3),
-                lit(None)
+                col("median")
             ).otherwise(col(column))
         ).drop("mean", "stddev")
 
