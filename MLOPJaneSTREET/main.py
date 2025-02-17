@@ -1,8 +1,8 @@
-import pandas as pd  # Ensure pandas is imported
+import pandas as pd 
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
-# Create Spark session
+
 
 # Use the environment variable for the data path and load all partitions
 
