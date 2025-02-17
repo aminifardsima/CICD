@@ -10,8 +10,7 @@ from tensorflow.keras.models import load_model
 #print_path = "/home/sima/data/prediction.txt"
 #model_path="/home/sima/data/stock_model.keras"
 
-#file_path = "/app/data/train.parquet"
-#print_path = "/app/data/printed.txt"
+
 
 
 file_path  ="/app/data/test.csv"
